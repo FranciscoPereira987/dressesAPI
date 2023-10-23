@@ -1,0 +1,40 @@
+version: '0.9'
+
+services:
+
+  
+  db:
+    container_name: db
+    image: ankane/pgvector:latest
+    networks:
+      - dev_net
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=test
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    container_name: server
+    image: server:latest
+    volumes:
+      - ./data:/data/
+    ports:
+      - 8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - dev_net
+
+
+networks:
+  dev_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.125.0/24
