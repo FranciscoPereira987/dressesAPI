@@ -1,7 +1,6 @@
 #Implement API methods
 from .setup import startup, manage_client
 import json
-import socket
 import logging as log
 
 from fastapi import FastAPI, status
@@ -12,9 +11,6 @@ from fastapi.responses import JSONResponse
 app = FastAPI()
 log.basicConfig(level=log.DEBUG)
 model, db = startup("db")
-with open("/data/FEIDEGGER_release_1.2.json") as file:
-    data = json.load(file)
-model.process_data(data, db)
 
 @app.get("/dresses")
 async def root(query: str = None, limit: int = 2) -> dict:
