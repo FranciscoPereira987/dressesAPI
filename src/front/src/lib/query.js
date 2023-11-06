@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const SERVER = "http://localhost:8080/dresses"
+const SERVER = "http://127.0.0.1:8080/dresses"
 
 export default async function getDresses(query, limit) {
     return axios.get(SERVER, {

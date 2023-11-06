@@ -4,6 +4,7 @@ build:
 	docker build -t server -f src/server/Dockerfile .
 	docker build -t gateway -f src/gateway/Dockerfile .
 	docker build -t translator -f src/translator/Dockerfile .
+	docker build -t front -f src/front/Dockerfile .
 .PHONY: build
 
 run-client:
