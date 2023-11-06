@@ -2,6 +2,13 @@ version: '0.9'
 
 services:
 
+  front:
+    container_name: front
+    image: front:latest
+    ports:
+      - 8080:4173
+    networks:
+      - dev_net
   
   db:
     container_name: db
@@ -32,8 +39,6 @@ services:
   gateway:
     container_name: gateway
     image: gateway:latest
-    ports:
-      - 8080:8080
     networks:
       - dev_net
 
