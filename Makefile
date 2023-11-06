@@ -2,6 +2,8 @@ SHELL := /bin/bash
 
 build:
 	docker build -t server -f src/server/Dockerfile .
+	docker build -t gateway -f src/gateway/Dockerfile .
+	docker build -t translator -f src/translator/Dockerfile .
 .PHONY: build
 
 run-client:

@@ -5,12 +5,16 @@ import logging as log
 
 from fastapi import FastAPI, status
 from fastapi.responses import JSONResponse
-
+import requests
 
 
 app = FastAPI()
 log.basicConfig(level=log.DEBUG)
 model, db = startup("db")
+
+requests.post("http://gateway:8080/ready", json={
+    "service_name": "SERVER"
+})
 
 @app.get("/dresses")
 async def root(query: str = None, limit: int = 2) -> dict:

@@ -23,11 +23,25 @@ services:
     image: server:latest
     volumes:
       - ./data:/data/
-    ports:
-      - 8080:8080
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - dev_net
+
+  gateway:
+    container_name: gateway
+    image: gateway:latest
+    ports:
+      - 8080:8080
+    networks:
+      - dev_net
+
+  translator:
+    container_name: translator
+    image: translator:latest
+    volumes:
+      - /home/francisco/.cache:/root/.cache
     networks:
       - dev_net
 
